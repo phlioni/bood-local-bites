@@ -7,7 +7,7 @@ export interface Product {
   price: number;
   image: string;
   category: string;
-  modelUrl?: string;
+  modelUrl?: string; // Campo opcional para o modelo 3D
 }
 
 export interface Category {
@@ -90,12 +90,15 @@ export const stores: Store[] = [
       {
         id: 'p5',
         name: 'X-Tudo Especial',
-        description: 'Bacon, ovo, salada',
+        description: 'Bacon, ovo, salada. (Modelo 3D: Abacate para teste)',
         price: 32.90,
         image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80',
         category: 'Lanches',
-        // LINK CORRIGIDO E TESTADO (Legacy Master)
-        modelUrl: 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Hamburger/glTF-Binary/Hamburger.glb'
+        // --- LINK NOVO E ESTÁVEL (Abacate) ---
+        modelUrl: 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/Avocado/glTF-Binary/Avocado.glb'
+
+        // Backup (Astronauta - 100% garantido se o abacate falhar):
+        // modelUrl: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb'
       },
       { id: 'p6', name: 'Hot-Dog Completo', description: '2 salsichas e purê', price: 24.00, image: 'https://images.unsplash.com/photo-1612392062631-94dd858cba88?w=800', category: 'Lanches' },
     ],

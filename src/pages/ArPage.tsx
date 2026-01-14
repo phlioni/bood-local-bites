@@ -6,14 +6,16 @@ import '@google/model-viewer';
 import { useCart } from '@/context/CartContext';
 import { useToast } from '@/hooks/use-toast';
 
+// Estilo movido para fora para evitar re-criação a cada render (melhora performance)
+const viewerStyle = { width: '100%', height: '100%', backgroundColor: '#111' };
+
 const ArPage = () => {
     const { productId } = useParams();
     const navigate = useNavigate();
     const { addToCart } = useCart();
     const { toast } = useToast();
 
-    const viewerStyle = { width: '100%', height: '100%', backgroundColor: '#111' };
-
+    // Busca o produto
     let product = null;
     let storeName = "";
 
@@ -26,6 +28,7 @@ const ArPage = () => {
         }
     }
 
+    // Se não achar o produto
     if (!product) {
         return (
             <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4">
@@ -46,11 +49,11 @@ const ArPage = () => {
 
     return (
         <div className="flex flex-col h-[100dvh] bg-black text-white relative overflow-hidden">
-            {/* Header Fixo no Topo */}
-            <div className="absolute top-0 left-0 right-0 z-50 p-4 pt-6 flex justify-between items-center bg-gradient-to-b from-black/90 to-transparent">
+            {/* Header Transparente */}
+            <div className="absolute top-0 left-0 right-0 z-50 p-4 pt-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
                 <button
                     onClick={() => navigate(-1)}
-                    className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center hover:bg-white/30 transition shadow-lg"
+                    className="pointer-events-auto w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center hover:bg-white/30 transition shadow-lg"
                 >
                     <ArrowLeft className="w-5 h-5 text-white" />
                 </button>
@@ -73,13 +76,13 @@ const ArPage = () => {
                         auto-rotate
                         ar
                         ar-modes="scene-viewer webxr quick-look"
-                        loading="eager"
+                        loading="eager" // Carrega imediatamente para evitar delays
                         style={viewerStyle}
                     >
-                        {/* BOTÃO CORRIGIDO: Agora fica no TOPO para não bater no footer */}
+                        {/* Botão AR fixo no topo para não ser coberto pelo footer */}
                         <button
                             slot="ar-button"
-                            className="absolute top-24 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur text-blue-700 border border-blue-200 px-6 py-3 rounded-full font-bold shadow-xl flex items-center gap-3 z-[100] active:scale-95 transition-all animate-in fade-in slide-in-from-top-4"
+                            className="absolute top-24 left-1/2 transform -translate-x-1/2 bg-white/95 backdrop-blur text-blue-700 border border-blue-100 px-6 py-3 rounded-full font-bold shadow-xl flex items-center gap-2 z-[100] active:scale-95 transition-all animate-in fade-in slide-in-from-top-4 cursor-pointer"
                         >
                             <Box className="w-5 h-5 stroke-2" />
                             Ver na sua mesa
@@ -92,7 +95,7 @@ const ArPage = () => {
                 )}
             </div>
 
-            {/* Footer (Ficha do Produto) */}
+            {/* Footer com Preço e Botão */}
             <div className="absolute bottom-0 left-0 right-0 bg-white text-gray-900 p-6 pt-8 rounded-t-[2rem] shadow-[0_-10px_40px_rgba(0,0,0,0.3)] z-50">
                 <div className="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6"></div>
 
