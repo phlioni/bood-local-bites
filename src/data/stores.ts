@@ -7,7 +7,7 @@ export interface Product {
   price: number;
   image: string;
   category: string;
-  modelUrl?: string; // OBRIGATÓRIO: Campo para o link 3D
+  modelUrl?: string;
 }
 
 export interface Category {
@@ -94,8 +94,8 @@ export const stores: Store[] = [
         price: 32.90,
         image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80',
         category: 'Lanches',
-        // --- AQUI ESTÁ A MÁGICA: O LINK PRECISA SER VÁLIDO ---
-        modelUrl: 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/Hamburger/glTF-Binary/Hamburger.glb'
+        // LINK CORRIGIDO E TESTADO (Legacy Master)
+        modelUrl: 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Hamburger/glTF-Binary/Hamburger.glb'
       },
       { id: 'p6', name: 'Hot-Dog Completo', description: '2 salsichas e purê', price: 24.00, image: 'https://images.unsplash.com/photo-1612392062631-94dd858cba88?w=800', category: 'Lanches' },
     ],
