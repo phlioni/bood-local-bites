@@ -1,151 +1,106 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Star, Clock, MapPin, Phone, Share2 } from 'lucide-react';
 import { stores } from '@/data/stores';
 import { ProductCard } from '@/components/ProductCard';
-import { useCart } from '@/context/CartContext';
+import { ArrowLeft, Star, Clock, MapPin, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Badge } from '@/components/ui/badge';
+import { useCart } from '@/context/CartContext';
 
 const StorePage = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
   const navigate = useNavigate();
-  const { getItemCount, getTotal } = useCart();
+  const { items } = useCart();
 
-  const store = stores.find((s) => s.id === id);
+  const store = stores.find(s => s.id === Number(id));
 
   if (!store) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-surface-sunken">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Loja não encontrada</h1>
-          <Button onClick={() => navigate('/')} variant="outline">
-            Voltar ao início
-          </Button>
-        </div>
+      <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center">
+        <h2 className="text-xl font-bold text-gray-800 mb-2">Loja não encontrada</h2>
+        <Button onClick={() => navigate('/')}>Voltar ao Mapa</Button>
       </div>
     );
   }
 
-  const productsByCategory = store.products.reduce((acc, product) => {
-    if (!acc[product.category]) {
-      acc[product.category] = [];
-    }
-    acc[product.category].push(product);
-    return acc;
-  }, {} as Record<string, typeof store.products>);
-
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(price);
-  };
-
-  const itemCount = getItemCount();
-  const total = getTotal();
+  const cartItemCount = items.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-surface-sunken pb-32">
-      {/* Hero Image */}
-      <div className="relative h-56">
+    <div className="min-h-screen bg-gray-50 pb-24">
+      {/* Imagem de Capa e Botão Voltar */}
+      <div className="relative h-56 md:h-72 w-full">
         <img
           src={store.image}
           alt={store.name}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
-        {/* Back Button */}
         <button
           onClick={() => navigate(-1)}
-          className="absolute top-4 left-4 w-10 h-10 rounded-full bg-card/90 backdrop-blur-sm flex items-center justify-center shadow-lg"
+          className="absolute top-4 left-14 md:left-4 z-10 bg-white/90 p-2 rounded-full shadow-lg backdrop-blur-sm"
         >
-          <ArrowLeft className="w-5 h-5 text-foreground" />
+          <ArrowLeft className="w-5 h-5 text-gray-800" />
         </button>
-
-        {/* Share Button */}
-        <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-card/90 backdrop-blur-sm flex items-center justify-center shadow-lg">
-          <Share2 className="w-5 h-5 text-foreground" />
-        </button>
-
-        {/* Status Badge */}
-        <div className="absolute bottom-4 left-4">
-          <span
-            className={cn(
-              'px-3 py-1.5 rounded-full text-sm font-semibold',
-              store.isOpen
-                ? 'bg-accent text-accent-foreground'
-                : 'bg-muted text-muted-foreground'
-            )}
-          >
-            {store.isOpen ? 'Aberto Agora' : 'Fechado'}
-          </span>
-        </div>
       </div>
 
-      {/* Store Info */}
-      <div className="bg-card px-4 py-4 border-b border-border">
-        <h1 className="text-2xl font-bold text-foreground">{store.name}</h1>
-        <p className="text-muted-foreground mt-1">{store.description}</p>
-
-        <div className="flex items-center gap-4 mt-3 text-sm">
-          <div className="flex items-center gap-1">
-            <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
-            <span className="font-semibold text-foreground">{store.rating}</span>
-            <span className="text-muted-foreground">({store.reviewCount})</span>
-          </div>
-          <div className="flex items-center gap-1 text-muted-foreground">
-            <Clock className="w-4 h-4" />
-            <span>{store.deliveryTime}</span>
-          </div>
-          <div className="flex items-center gap-1 text-muted-foreground">
-            <MapPin className="w-4 h-4" />
-            <span>{store.distance}</span>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2 mt-3 text-sm text-muted-foreground">
-          <MapPin className="w-4 h-4 shrink-0" />
-          <span className="truncate">{store.address}</span>
-        </div>
-
-        <a
-          href={`tel:${store.phone}`}
-          className="inline-flex items-center gap-2 mt-2 text-sm text-primary font-medium"
-        >
-          <Phone className="w-4 h-4" />
-          {store.phone}
-        </a>
-      </div>
-
-      {/* Products */}
-      <div className="px-4 py-4">
-        {Object.entries(productsByCategory).map(([category, products]) => (
-          <section key={category} className="mb-6">
-            <h2 className="text-lg font-bold text-foreground mb-3">{category}</h2>
-            <div className="space-y-3">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} store={store} />
-              ))}
+      {/* Informações da Loja */}
+      <div className="px-4 -mt-10 relative z-20 max-w-4xl mx-auto">
+        <div className="bg-white rounded-2xl shadow-lg p-5 border border-gray-100">
+          <div className="flex justify-between items-start">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900 leading-tight">{store.name}</h1>
+              <p className="text-sm text-gray-500 mt-1">{store.description}</p>
             </div>
-          </section>
-        ))}
+            <div className="flex flex-col items-end gap-1">
+              <Badge variant={store.isOpen ? "default" : "destructive"} className={store.isOpen ? "bg-green-500" : ""}>
+                {store.isOpen ? "Aberto" : "Fechado"}
+              </Badge>
+              <div className="flex items-center gap-1 text-amber-500 font-bold text-sm mt-1">
+                <Star className="w-4 h-4 fill-current" />
+                {store.rating}
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4 pt-4 border-t border-gray-50">
+            <div className="flex items-center gap-2 text-sm text-gray-600">
+              <Clock className="w-4 h-4 text-blue-500" />
+              <span>{store.deliveryTime}</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-gray-600">
+              <MapPin className="w-4 h-4 text-red-500" />
+              <span className="truncate">{store.distance || '1.2 km'}</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-gray-600 col-span-2">
+              <Phone className="w-4 h-4 text-green-500" />
+              <span>{store.phone || 'Contato indisponível'}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Lista de Produtos */}
+        <div className="mt-8">
+          <h3 className="text-lg font-bold text-gray-800 mb-4 px-1">Cardápio</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {store.products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* Floating Cart Button */}
-      {itemCount > 0 && (
-        <div className="fixed bottom-20 left-4 right-4 z-50 animate-slide-up">
+      {/* Botão Flutuante de Carrinho (Apenas se tiver itens) */}
+      {cartItemCount > 0 && (
+        <div className="fixed bottom-6 left-4 right-4 z-40 md:left-auto md:right-8 md:w-96">
           <Button
             onClick={() => navigate('/cart')}
-            className="w-full h-14 bg-accent hover:bg-accent/90 text-accent-foreground rounded-2xl shadow-elevated flex items-center justify-between px-5"
+            className="w-full h-14 bg-green-600 hover:bg-green-700 text-white rounded-xl shadow-xl flex items-center justify-between px-6 text-lg animate-in slide-in-from-bottom-5"
           >
-            <div className="flex items-center gap-3">
-              <span className="w-7 h-7 rounded-full bg-accent-foreground/20 flex items-center justify-center text-sm font-bold">
-                {itemCount}
-              </span>
-              <span className="font-semibold">Ver Carrinho</span>
-            </div>
-            <span className="font-bold">{formatPrice(total)}</span>
+            <span className="bg-green-800 px-3 py-1 rounded-full text-sm font-bold">
+              {cartItemCount}
+            </span>
+            <span className="font-semibold">Ver Carrinho</span>
+            <span className="font-bold">R$ {items.reduce((acc, i) => acc + (i.price * i.quantity), 0).toFixed(2)}</span>
           </Button>
         </div>
       )}

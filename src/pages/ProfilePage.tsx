@@ -1,105 +1,58 @@
-import { useNavigate } from 'react-router-dom';
-import {
-  User,
-  MapPin,
-  Heart,
-  Clock,
-  Settings,
-  HelpCircle,
-  LogOut,
-  ChevronRight,
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
-
-const menuItems = [
-  { icon: MapPin, label: 'Endereços Salvos', path: '/addresses' },
-  { icon: Heart, label: 'Lojas Favoritas', path: '/favorites' },
-  { icon: Clock, label: 'Histórico de Pedidos', path: '/orders' },
-  { icon: Settings, label: 'Configurações', path: '/settings' },
-  { icon: HelpCircle, label: 'Ajuda e Suporte', path: '/help' },
-];
+import { User, MapPin, History, CreditCard, ChevronRight, LogOut } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const ProfilePage = () => {
-  const navigate = useNavigate();
+  const menuItems = [
+    { icon: History, label: "Meus Pedidos", desc: "Ver histórico completo" },
+    { icon: MapPin, label: "Endereços", desc: "Gerenciar locais de entrega" },
+    { icon: CreditCard, label: "Pagamentos", desc: "Meus cartões salvos" },
+  ];
 
   return (
-    <div className="min-h-screen bg-surface-sunken pb-20">
-      {/* Profile Header */}
-      <header className="bg-primary gradient-primary text-primary-foreground px-4 pt-8 pb-12">
-        <h1 className="text-2xl font-bold mb-6">Perfil</h1>
-
-        <div className="flex items-center gap-4">
-          <div className="w-20 h-20 rounded-full bg-primary-foreground/20 flex items-center justify-center">
-            <User className="w-10 h-10 text-primary-foreground" />
-          </div>
-          <div className="flex-1">
-            <h2 className="text-xl font-bold">Bem-vindo!</h2>
-            <p className="text-primary-foreground/80 mt-0.5">
-              Entre para acompanhar seus pedidos
-            </p>
+    <div className="min-h-screen bg-gray-50 pb-24 pt-14 md:pt-6">
+      <div className="max-w-2xl mx-auto px-4">
+        {/* Header do Perfil */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center gap-4 mb-6">
+          <Avatar className="w-20 h-20 border-4 border-blue-50">
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>CL</AvatarFallback>
+          </Avatar>
+          <div>
+            <h1 className="text-xl font-bold text-gray-900">Cliente Bood</h1>
+            <p className="text-sm text-gray-500">cliente@bood.com.br</p>
+            <Button variant="link" className="p-0 h-auto text-blue-600 font-semibold mt-1">
+              Editar Perfil
+            </Button>
           </div>
         </div>
 
-        <button className="mt-4 w-full py-3 rounded-xl bg-primary-foreground text-primary font-semibold">
-          Entrar / Criar Conta
-        </button>
-      </header>
+        {/* Menu de Opções */}
+        <div className="space-y-3">
+          <h2 className="text-sm font-bold text-gray-400 uppercase tracking-wider ml-1">Minha Conta</h2>
 
-      {/* Quick Stats */}
-      <div className="mx-4 -mt-6 grid grid-cols-3 gap-3">
-        {[
-          { label: 'Pedidos', value: '0' },
-          { label: 'Favoritos', value: '0' },
-          { label: 'Endereços', value: '0' },
-        ].map((stat) => (
-          <div
-            key={stat.label}
-            className="bg-card rounded-xl p-4 text-center shadow-card"
-          >
-            <p className="text-2xl font-bold text-foreground">{stat.value}</p>
-            <p className="text-sm text-muted-foreground">{stat.label}</p>
+          <div className="bg-white rounded-xl border border-gray-100 divide-y divide-gray-50 overflow-hidden shadow-sm">
+            {menuItems.map((item, idx) => (
+              <button key={idx} className="w-full flex items-center gap-4 p-4 hover:bg-gray-50 transition-colors text-left">
+                <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+                  <item.icon className="w-5 h-5" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-medium text-gray-900">{item.label}</h3>
+                  <p className="text-xs text-gray-500">{item.desc}</p>
+                </div>
+                <ChevronRight className="w-5 h-5 text-gray-300" />
+              </button>
+            ))}
           </div>
-        ))}
-      </div>
-
-      {/* Menu Items */}
-      <div className="px-4 mt-6">
-        <div className="bg-card rounded-2xl overflow-hidden shadow-sm">
-          {menuItems.map((item, index) => (
-            <button
-              key={item.path}
-              onClick={() => navigate(item.path)}
-              className={cn(
-                'w-full flex items-center gap-4 px-4 py-4 hover:bg-secondary/50 transition-colors',
-                index !== menuItems.length - 1 && 'border-b border-border'
-              )}
-            >
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-                <item.icon className="w-5 h-5 text-primary" />
-              </div>
-              <span className="flex-1 text-left font-medium text-foreground">
-                {item.label}
-              </span>
-              <ChevronRight className="w-5 h-5 text-muted-foreground" />
-            </button>
-          ))}
         </div>
 
-        {/* Logout Button */}
-        <button className="w-full flex items-center gap-4 px-4 py-4 mt-4 bg-card rounded-2xl shadow-sm hover:bg-secondary/50 transition-colors">
-          <div className="w-10 h-10 rounded-full bg-destructive/10 flex items-center justify-center">
-            <LogOut className="w-5 h-5 text-destructive" />
-          </div>
-          <span className="flex-1 text-left font-medium text-destructive">
-            Sair
-          </span>
-        </button>
-      </div>
-
-      {/* App Info */}
-      <div className="mt-8 text-center text-sm text-muted-foreground">
-        <p>Bood v1.0.0</p>
-        <p className="mt-1">Descubra o local. Peça fácil.</p>
+        <div className="mt-8">
+          <Button variant="outline" className="w-full border-red-100 text-red-600 hover:bg-red-50 hover:text-red-700 h-12 rounded-xl">
+            <LogOut className="w-4 h-4 mr-2" />
+            Sair da conta
+          </Button>
+        </div>
       </div>
     </div>
   );
