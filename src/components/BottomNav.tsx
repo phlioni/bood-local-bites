@@ -4,10 +4,10 @@ import { useCart } from '@/context/CartContext';
 import { cn } from '@/lib/utils';
 
 const navItems = [
-  { icon: Home, label: 'Home', path: '/' },
-  { icon: MapPin, label: 'Map', path: '/map' },
-  { icon: ShoppingCart, label: 'Cart', path: '/cart' },
-  { icon: User, label: 'Profile', path: '/profile' },
+  { icon: Home, label: 'Início', path: '/' },
+  { icon: MapPin, label: 'Mapa', path: '/map' },
+  { icon: ShoppingCart, label: 'Carrinho', path: '/cart' },
+  { icon: User, label: 'Perfil', path: '/profile' },
 ];
 
 export const BottomNav = () => {

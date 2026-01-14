@@ -17,9 +17,9 @@ const StorePage = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-surface-sunken">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Store not found</h1>
+          <h1 className="text-2xl font-bold text-foreground mb-2">Loja não encontrada</h1>
           <Button onClick={() => navigate('/')} variant="outline">
-            Go back home
+            Voltar ao início
           </Button>
         </div>
       </div>
@@ -78,7 +78,7 @@ const StorePage = () => {
                 : 'bg-muted text-muted-foreground'
             )}
           >
-            {store.isOpen ? 'Open Now' : 'Closed'}
+            {store.isOpen ? 'Aberto Agora' : 'Fechado'}
           </span>
         </div>
       </div>
@@ -143,7 +143,7 @@ const StorePage = () => {
               <span className="w-7 h-7 rounded-full bg-accent-foreground/20 flex items-center justify-center text-sm font-bold">
                 {itemCount}
               </span>
-              <span className="font-semibold">View Cart</span>
+              <span className="font-semibold">Ver Carrinho</span>
             </div>
             <span className="font-bold">{formatPrice(total)}</span>
           </Button>

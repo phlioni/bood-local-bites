@@ -12,11 +12,11 @@ import {
 import { cn } from '@/lib/utils';
 
 const menuItems = [
-  { icon: MapPin, label: 'Saved Addresses', path: '/addresses' },
-  { icon: Heart, label: 'Favorite Stores', path: '/favorites' },
-  { icon: Clock, label: 'Order History', path: '/orders' },
-  { icon: Settings, label: 'Settings', path: '/settings' },
-  { icon: HelpCircle, label: 'Help & Support', path: '/help' },
+  { icon: MapPin, label: 'Endereços Salvos', path: '/addresses' },
+  { icon: Heart, label: 'Lojas Favoritas', path: '/favorites' },
+  { icon: Clock, label: 'Histórico de Pedidos', path: '/orders' },
+  { icon: Settings, label: 'Configurações', path: '/settings' },
+  { icon: HelpCircle, label: 'Ajuda e Suporte', path: '/help' },
 ];
 
 const ProfilePage = () => {
@@ -26,31 +26,31 @@ const ProfilePage = () => {
     <div className="min-h-screen bg-surface-sunken pb-20">
       {/* Profile Header */}
       <header className="bg-primary gradient-primary text-primary-foreground px-4 pt-8 pb-12">
-        <h1 className="text-2xl font-bold mb-6">Profile</h1>
+        <h1 className="text-2xl font-bold mb-6">Perfil</h1>
 
         <div className="flex items-center gap-4">
           <div className="w-20 h-20 rounded-full bg-primary-foreground/20 flex items-center justify-center">
             <User className="w-10 h-10 text-primary-foreground" />
           </div>
           <div className="flex-1">
-            <h2 className="text-xl font-bold">Welcome!</h2>
+            <h2 className="text-xl font-bold">Bem-vindo!</h2>
             <p className="text-primary-foreground/80 mt-0.5">
-              Sign in to track your orders
+              Entre para acompanhar seus pedidos
             </p>
           </div>
         </div>
 
         <button className="mt-4 w-full py-3 rounded-xl bg-primary-foreground text-primary font-semibold">
-          Sign In / Create Account
+          Entrar / Criar Conta
         </button>
       </header>
 
       {/* Quick Stats */}
       <div className="mx-4 -mt-6 grid grid-cols-3 gap-3">
         {[
-          { label: 'Orders', value: '0' },
-          { label: 'Favorites', value: '0' },
-          { label: 'Addresses', value: '0' },
+          { label: 'Pedidos', value: '0' },
+          { label: 'Favoritos', value: '0' },
+          { label: 'Endereços', value: '0' },
         ].map((stat) => (
           <div
             key={stat.label}
@@ -91,7 +91,7 @@ const ProfilePage = () => {
             <LogOut className="w-5 h-5 text-destructive" />
           </div>
           <span className="flex-1 text-left font-medium text-destructive">
-            Log Out
+            Sair
           </span>
         </button>
       </div>
@@ -99,7 +99,7 @@ const ProfilePage = () => {
       {/* App Info */}
       <div className="mt-8 text-center text-sm text-muted-foreground">
         <p>Bood v1.0.0</p>
-        <p className="mt-1">Discover local. Order easy.</p>
+        <p className="mt-1">Descubra o local. Peça fácil.</p>
       </div>
     </div>
   );

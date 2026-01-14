@@ -30,8 +30,8 @@ const MapPage = () => {
           <ArrowLeft className="w-5 h-5 text-foreground" />
         </button>
         <div className="flex-1 bg-card shadow-lg rounded-xl px-4 py-2">
-          <h1 className="font-semibold text-foreground">Stores Near You</h1>
-          <p className="text-xs text-muted-foreground">{stores.length} stores available</p>
+          <h1 className="font-semibold text-foreground">Lojas Próximas</h1>
+          <p className="text-xs text-muted-foreground">{stores.length} lojas disponíveis</p>
         </div>
       </header>
 
@@ -136,7 +136,7 @@ const MapPage = () => {
                         : 'bg-muted text-muted-foreground'
                     )}
                   >
-                    {selectedStore.isOpen ? 'Open' : 'Closed'}
+                    {selectedStore.isOpen ? 'Aberto' : 'Fechado'}
                   </span>
                 </div>
 
@@ -144,7 +144,7 @@ const MapPage = () => {
                   onClick={() => navigate(`/store/${selectedStore.id}`)}
                   className="mt-3 w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold rounded-xl h-10"
                 >
-                  View Store
+                  Ver Loja
                 </Button>
               </div>
             </div>

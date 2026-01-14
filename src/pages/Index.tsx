@@ -33,10 +33,10 @@ const Index = () => {
         <section className="mt-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-foreground">
-              {selectedCategory === 'all' ? 'Featured Stores' : 'Results'}
+              {selectedCategory === 'all' ? 'Lojas em Destaque' : 'Resultados'}
             </h2>
             <span className="text-sm text-muted-foreground">
-              {filteredStores.length} stores
+              {filteredStores.length} {filteredStores.length === 1 ? 'loja' : 'lojas'}
             </span>
           </div>
 
@@ -50,7 +50,7 @@ const Index = () => {
                 <div className="flex items-center gap-3 pt-4">
                   <div className="h-px flex-1 bg-border" />
                   <span className="text-sm text-muted-foreground font-medium">
-                    Closed Now
+                    Fechados Agora
                   </span>
                   <div className="h-px flex-1 bg-border" />
                 </div>
@@ -62,9 +62,9 @@ const Index = () => {
 
             {filteredStores.length === 0 && (
               <div className="text-center py-12">
-                <p className="text-muted-foreground text-lg">No stores found</p>
+                <p className="text-muted-foreground text-lg">Nenhuma loja encontrada</p>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Try adjusting your search or category
+                  Tente ajustar sua busca ou categoria
                 </p>
               </div>
             )}
