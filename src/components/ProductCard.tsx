@@ -24,27 +24,28 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   const handleArView = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Evita cliques indesejados
+    e.stopPropagation();
     navigate(`/ar/${product.id}`);
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-row h-28 md:h-auto md:flex-col transition-all hover:shadow-md">
+    <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-row h-28 md:h-auto md:flex-col transition-all hover:shadow-md relative group">
       {/* Imagem */}
-      <div className="w-28 h-full md:w-full md:h-40 relative shrink-0">
+      <div className="w-28 h-full md:w-full md:h-40 relative shrink-0 bg-gray-50">
         <img
           src={product.image}
           alt={product.name}
           className="w-full h-full object-cover"
         />
-        {/* Badge 3D se disponível */}
+
+        {/* Badge 3D */}
         {product.modelUrl && (
           <button
             onClick={handleArView}
-            className="absolute top-2 right-2 bg-blue-600 text-white p-1.5 rounded-lg shadow-lg hover:bg-blue-700 transition animate-pulse"
+            className="absolute top-2 right-2 z-50 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg shadow-lg transition-all hover:scale-110 active:scale-95 flex items-center justify-center animate-in fade-in zoom-in duration-300"
             title="Ver em 3D"
           >
-            <Box className="w-4 h-4" />
+            <Box className="w-4 h-4 md:w-5 md:h-5" />
           </button>
         )}
       </div>
