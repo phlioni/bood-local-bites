@@ -13,7 +13,7 @@ import MapPage from "./pages/MapPage";
 import StorePage from "./pages/StorePage";
 import CartPage from "./pages/CartPage";
 import ProfilePage from "./pages/ProfilePage";
-import ArPage from "./pages/ArPage"; // Importe a nova página
+import ArPage from "./pages/ArPage"; // <--- IMPORTANTE: Importar a página
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -43,8 +43,10 @@ const App = () => (
                     <Route path="/store/:id" element={<StorePage />} />
                     <Route path="/cart" element={<CartPage />} />
                     <Route path="/profile" element={<ProfilePage />} />
-                    {/* NOVA ROTA DE AR */}
+
+                    {/* --- A ROTA MÁGICA --- */}
                     <Route path="/ar/:productId" element={<ArPage />} />
+
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </div>

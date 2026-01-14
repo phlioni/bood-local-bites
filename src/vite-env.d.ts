@@ -11,6 +11,7 @@ declare namespace JSX {
             'camera-controls'?: boolean;
             'auto-rotate'?: boolean;
             'shadow-intensity'?: string;
+            slot?: string; // Importante para o botão AR
         };
     }
 }

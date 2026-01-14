@@ -42,7 +42,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         {product.modelUrl && (
           <button
             onClick={handleArView}
-            className="absolute top-2 right-2 z-50 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg shadow-lg transition-all hover:scale-110 active:scale-95 flex items-center justify-center animate-in fade-in zoom-in duration-300"
+            className="absolute top-2 right-2 z-[999] bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg shadow-xl border-2 border-white transition-all hover:scale-110 active:scale-95 flex items-center justify-center cursor-pointer"
             title="Ver em 3D"
           >
             <Box className="w-4 h-4 md:w-5 md:h-5" />
