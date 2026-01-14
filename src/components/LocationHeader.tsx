@@ -23,9 +23,9 @@ export const LocationHeader = ({ onSearch }: LocationHeaderProps) => {
             <MapPin className="w-5 h-5 text-primary" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-xs text-muted-foreground">Deliver to</p>
+            <p className="text-xs text-muted-foreground">Entregar em</p>
             <button className="flex items-center gap-1 font-semibold text-foreground">
-              <span className="truncate">Current Location</span>
+              <span className="truncate">Localização Atual</span>
               <ChevronDown className="w-4 h-4 shrink-0" />
             </button>
           </div>
@@ -39,7 +39,7 @@ export const LocationHeader = ({ onSearch }: LocationHeaderProps) => {
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
         <Input
           type="text"
-          placeholder="Search stores, products..."
+          placeholder="Buscar lojas, produtos..."
           value={searchQuery}
           onChange={handleSearch}
           className="pl-10 h-11 bg-secondary border-0 rounded-xl text-foreground placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary"

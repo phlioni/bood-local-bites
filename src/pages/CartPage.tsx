@@ -29,11 +29,11 @@ const CartPage = () => {
 
   const handleSendOrder = () => {
     if (!customerName.trim()) {
-      toast.error('Please enter your name');
+      toast.error('Por favor, informe seu nome');
       return;
     }
     if (!isPickup && !address.trim()) {
-      toast.error('Please enter your delivery address');
+      toast.error('Por favor, informe seu endereço de entrega');
       return;
     }
     if (!store) return;
@@ -43,15 +43,15 @@ const CartPage = () => {
       .map((item) => `• ${item.product.name} x${item.quantity} - ${formatPrice(item.product.price * item.quantity)}`)
       .join('\n');
 
-    const deliveryType = isPickup ? '📍 *Pickup*' : `📍 *Delivery to:* ${address}`;
-    const noteText = note ? `\n📝 *Note:* ${note}` : '';
+    const deliveryType = isPickup ? '📍 *Retirada no local*' : `📍 *Entregar em:* ${address}`;
+    const noteText = note ? `\n📝 *Observação:* ${note}` : '';
 
-    const message = `🛒 *New Order from Bood!*
+    const message = `🛒 *Novo Pedido via Bood!*
 
-👤 *Client:* ${customerName}
+👤 *Cliente:* ${customerName}
 ${deliveryType}
 
-*Items:*
+*Itens:*
 ${itemsList}
 
 💰 *Total:* ${formatPrice(getTotal())}${noteText}`;
@@ -61,7 +61,7 @@ ${itemsList}
 
     window.open(whatsappUrl, '_blank');
     clearCart();
-    toast.success('Order sent! Check WhatsApp');
+    toast.success('Pedido enviado! Verifique o WhatsApp');
     navigate('/');
   };
 
@@ -75,22 +75,22 @@ ${itemsList}
           >
             <ArrowLeft className="w-5 h-5 text-foreground" />
           </button>
-          <h1 className="text-xl font-bold text-foreground">Cart</h1>
+          <h1 className="text-xl font-bold text-foreground">Carrinho</h1>
         </header>
 
         <div className="flex flex-col items-center justify-center px-4 py-20">
           <div className="w-24 h-24 rounded-full bg-secondary flex items-center justify-center mb-4">
             <StoreIcon className="w-12 h-12 text-muted-foreground" />
           </div>
-          <h2 className="text-xl font-bold text-foreground mb-2">Your cart is empty</h2>
+          <h2 className="text-xl font-bold text-foreground mb-2">Seu carrinho está vazio</h2>
           <p className="text-muted-foreground text-center mb-6">
-            Explore stores and add some items to get started
+            Explore as lojas e adicione alguns itens para começar
           </p>
           <Button
             onClick={() => navigate('/')}
             className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold rounded-full px-6"
           >
-            Browse Stores
+            Explorar Lojas
           </Button>
         </div>
       </div>
@@ -107,7 +107,7 @@ ${itemsList}
           <ArrowLeft className="w-5 h-5 text-foreground" />
         </button>
         <div className="flex-1">
-          <h1 className="text-xl font-bold text-foreground">Cart</h1>
+          <h1 className="text-xl font-bold text-foreground">Carrinho</h1>
           {store && (
             <p className="text-sm text-muted-foreground truncate">{store.name}</p>
           )}
@@ -123,7 +123,7 @@ ${itemsList}
       <main className="px-4 py-4">
         {/* Cart Items */}
         <section className="bg-card rounded-2xl p-4 mb-4">
-          <h2 className="font-semibold text-foreground mb-3">Your Items</h2>
+          <h2 className="font-semibold text-foreground mb-3">Seus Itens</h2>
           <div className="space-y-4">
             {items.map((item) => (
               <div key={item.product.id} className="flex items-center gap-3">
@@ -164,18 +164,18 @@ ${itemsList}
 
         {/* Delivery Info */}
         <section className="bg-card rounded-2xl p-4 mb-4">
-          <h2 className="font-semibold text-foreground mb-4">Delivery Details</h2>
+          <h2 className="font-semibold text-foreground mb-4">Dados da Entrega</h2>
 
           <div className="space-y-4">
             <div>
               <Label htmlFor="name" className="text-sm font-medium text-foreground">
-                Your Name *
+                Seu Nome *
               </Label>
               <Input
                 id="name"
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
-                placeholder="Enter your name"
+                placeholder="Digite seu nome"
                 className="mt-1.5 bg-secondary border-0 h-12 rounded-xl"
               />
             </div>
@@ -184,7 +184,7 @@ ${itemsList}
               <div className="flex items-center gap-2">
                 <MapPin className="w-5 h-5 text-muted-foreground" />
                 <Label htmlFor="pickup" className="font-medium text-foreground">
-                  Pickup at store
+                  Retirar no local
                 </Label>
               </div>
               <Switch
@@ -197,13 +197,13 @@ ${itemsList}
             {!isPickup && (
               <div>
                 <Label htmlFor="address" className="text-sm font-medium text-foreground">
-                  Delivery Address *
+                  Endereço de Entrega *
                 </Label>
                 <Input
                   id="address"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  placeholder="Enter your full address"
+                  placeholder="Digite seu endereço completo"
                   className="mt-1.5 bg-secondary border-0 h-12 rounded-xl"
                 />
               </div>
@@ -212,13 +212,13 @@ ${itemsList}
             <div>
               <Label htmlFor="note" className="text-sm font-medium text-foreground flex items-center gap-2">
                 <MessageSquare className="w-4 h-4" />
-                Note to store (optional)
+                Observação para a loja (opcional)
               </Label>
               <Textarea
                 id="note"
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
-                placeholder="Any special requests?"
+                placeholder="Algum pedido especial?"
                 className="mt-1.5 bg-secondary border-0 rounded-xl resize-none"
                 rows={3}
               />
@@ -228,19 +228,19 @@ ${itemsList}
 
         {/* Order Summary */}
         <section className="bg-card rounded-2xl p-4">
-          <h2 className="font-semibold text-foreground mb-3">Order Summary</h2>
+          <h2 className="font-semibold text-foreground mb-3">Resumo do Pedido</h2>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Subtotal</span>
               <span className="text-foreground">{formatPrice(getTotal())}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Delivery</span>
-              <span className="text-foreground">To be agreed</span>
+              <span className="text-muted-foreground">Entrega</span>
+              <span className="text-foreground">A combinar</span>
             </div>
             <div className="border-t border-border pt-2 mt-2">
               <div className="flex justify-between">
-                <span className="font-bold text-foreground">Estimated Total</span>
+                <span className="font-bold text-foreground">Total Estimado</span>
                 <span className="font-bold text-primary text-lg">{formatPrice(getTotal())}</span>
               </div>
             </div>
@@ -255,7 +255,7 @@ ${itemsList}
           className="w-full h-14 bg-accent hover:bg-accent/90 text-accent-foreground rounded-2xl shadow-elevated font-bold text-lg flex items-center justify-center gap-2"
         >
           <Send className="w-5 h-5" />
-          Send Order via WhatsApp
+          Enviar Pedido via WhatsApp
         </Button>
       </div>
     </div>

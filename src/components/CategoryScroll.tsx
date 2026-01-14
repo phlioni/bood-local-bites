@@ -20,7 +20,7 @@ export const CategoryScroll = ({ selected, onSelect }: CategoryScrollProps) => {
           )}
         >
           <span>🌟</span>
-          <span>All</span>
+          <span>Todos</span>
         </button>
         {categories.map((category) => (
           <button

@@ -23,7 +23,7 @@ export const StoreCard = ({ store }: StoreCardProps) => {
         {!store.isOpen && (
           <div className="absolute inset-0 bg-foreground/60 flex items-center justify-center">
             <span className="bg-card text-foreground px-4 py-2 rounded-full font-semibold text-sm">
-              Closed
+              Fechado
             </span>
           </div>
         )}
@@ -36,7 +36,7 @@ export const StoreCard = ({ store }: StoreCardProps) => {
                 : 'bg-muted text-muted-foreground'
             )}
           >
-            {store.isOpen ? 'Open' : 'Closed'}
+            {store.isOpen ? 'Aberto' : 'Fechado'}
           </span>
         </div>
       </div>

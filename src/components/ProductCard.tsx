@@ -50,7 +50,7 @@ export const ProductCard = ({ product, store }: ProductCardProps) => {
               className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold rounded-full px-4 h-9"
             >
               <Plus className="w-4 h-4 mr-1" />
-              Add
+              Adicionar
             </Button>
           ) : (
             <div className="flex items-center gap-2 bg-secondary rounded-full p-1">
