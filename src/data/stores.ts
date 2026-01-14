@@ -7,6 +7,7 @@ export interface Product {
   price: number;
   image: string;
   category: string;
+  modelUrl?: string; // Novo campo opcional para o 3D
 }
 
 export interface Category {
@@ -45,7 +46,6 @@ export const categories = [
   { id: 'beauty', name: 'Beleza', icon: 'Sparkles', emoji: '💅' },
 ];
 
-// Coordenadas ajustadas para ficarem próximas umas das outras em Santos (Centro fictício: -23.9650, -46.3300)
 export const stores: Store[] = [
   {
     id: 1,
@@ -63,7 +63,7 @@ export const stores: Store[] = [
     phone: '+55 13 99999-0001',
     whatsapp: '5513999990001',
     lat: -23.9709,
-    lng: -46.3150, // Embaré
+    lng: -46.3150,
     products: [
       { id: 'p1', name: 'Picanha Premium', description: 'Corte nobre, 1kg', price: 89.90, image: 'https://images.unsplash.com/photo-1603048297172-c92544798d5a?w=400&q=80', category: 'Bovinos' },
       { id: 'p2', name: 'Espetinho Misto', description: 'Pacote com 10', price: 35.00, image: 'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=800', category: 'Churrasco' },
@@ -85,9 +85,18 @@ export const stores: Store[] = [
     phone: '+55 13 99999-0002',
     whatsapp: '5513999990002',
     lat: -23.9720,
-    lng: -46.3100, // Ponta da Praia
+    lng: -46.3100,
     products: [
-      { id: 'p5', name: 'X-Tudo Especial', description: 'Bacon, ovo, salada', price: 32.90, image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80', category: 'Lanches' },
+      {
+        id: 'p5',
+        name: 'X-Tudo Especial',
+        description: 'Bacon, ovo, salada',
+        price: 32.90,
+        image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80',
+        category: 'Lanches',
+        // ADICIONEI O MODELO 3D AQUI
+        modelUrl: 'https://modelviewer.dev/shared-assets/models/Hamburger.glb'
+      },
       { id: 'p6', name: 'Hot-Dog Completo', description: '2 salsichas e purê', price: 24.00, image: 'https://images.unsplash.com/photo-1612392062631-94dd858cba88?w=800', category: 'Lanches' },
     ],
   },
@@ -105,7 +114,7 @@ export const stores: Store[] = [
     isOpen: true,
     address: 'Gonzaga',
     lat: -23.9650,
-    lng: -46.3350, // Gonzaga
+    lng: -46.3350,
     products: [
       { id: 'p9', name: 'Corte Masculino', description: 'Navalha e toalha quente', price: 45.00, image: 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=400&q=80', category: 'Cortes' },
     ],
@@ -124,7 +133,7 @@ export const stores: Store[] = [
     isOpen: true,
     address: 'Shopping Miramar',
     lat: -23.9630,
-    lng: -46.3320, // Gonzaga/Miramar
+    lng: -46.3320,
     products: [
       { id: 'p12', name: 'Camiseta Básica', description: 'Algodão leve', price: 59.90, image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80', category: 'Roupas' },
     ],
@@ -143,7 +152,7 @@ export const stores: Store[] = [
     isOpen: true,
     address: 'Canal 3',
     lat: -23.9580,
-    lng: -46.3300, // Vila Rica
+    lng: -46.3300,
     products: [
       { id: 'p15', name: 'Cerveja Gelada', description: 'Pack 6un', price: 35.90, image: 'https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=400&q=80', category: 'Bebidas' },
     ],
@@ -162,7 +171,7 @@ export const stores: Store[] = [
     isOpen: false,
     address: 'Vila Belmiro',
     lat: -23.9510,
-    lng: -46.3380, // Vila Belmiro
+    lng: -46.3380,
     products: [
       { id: 'p19', name: 'Margherita', description: 'Tradicional', price: 42.90, image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&q=80', category: 'Pizzas' },
     ],
